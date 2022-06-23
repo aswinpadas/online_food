@@ -15,7 +15,7 @@
             <!-- Sidebar end=============================================== -->
 		<h4>Latest Products </h4>
 			  <ul class="thumbnails" >
-				  {% for product in products  %}
+				  {% for product in pg.object_list  %}
 				  {% if product.stock > 0 %}
 						<li class="span3">
 							<div class="card" >
@@ -23,15 +23,15 @@
 									<a  href="{% url 'prod_detail' product.slug %}"><img src="{{product.product_image.url}}" style="" class="card-img-top" alt=""/></a>
 
 									<div class="caption">
-									  <h5 align="center">{{product.product_name}}</h5>
-									  <a  href="#"><p>
+									  <h5 align="center">{{product.product_name | slice:":22"}}</h5>
+									  <a  href="{% url 'prod_detail' product.slug %}"><p>
 										{{ product.desc | slice:":135" }}...
 									  </p></a>
 										<p>
 											<strong>Slock left : {{product.stock}}</strong>
 										</p>
 									  <h4 style="text-align:center">
-										  <a class="btn" href="#" >Add to <i class="icon-shopping-cart" ></i></a> <a class="btn btn-primary" href="#">&#8377; {{product.product_price}}</a></h4>
+										  <a class="btn" href="#" >Add to <i class="icon-shopping-cart" ></i></a> <a class="btn btn-primary" href="{% url 'prod_detail' product.slug %}">&#8377; {{product.product_price}}</a></h4>
 									</div>
 								</div>
 							</div>
@@ -40,5 +40,12 @@
 				  {% endfor %}
 			  </ul>
     </div>
+</div>
+<div>
+	<center>
+		{% for p in pg.paginator.page_range %}
+			<a href="?page={{p}}" class="btn btn-light btn-sm {% if pg.number == p %} active {% endif %}">{{p}}</a>
+		{% endfor %}
+	</center>
 </div>
 {% endblock %}

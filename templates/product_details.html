@@ -8,12 +8,11 @@
             <div class="span12">
                 <ul class="breadcrumb">
                     <li><a href="/">Home</a> <span class="divider">/</span></li>
-                    <!--    <li><a href="products.html">Products</a> <span class="divider">/</span></li>-->
-                    <li class="active">product Details</li>
+                    <li class="active">Product Details</li>
                 </ul>
                 <div class="row">
                     <div id="gallery" class="span6 img">
-                        <a href="" title="{{ products.product_name }} " class="img" >
+                        <a href="" title="{{ products.product_name }} " class="img">
                             <img src="{{products.product_image.url}}" style="width:60%"
                                  alt="{{ products.product_name }}"/>
                         </a>
@@ -37,9 +36,14 @@
                                     <i class="span1"></i>
                                     <i class="span1"></i>
                                     <i class="span1"></i>
-                                    <input type="number" class="span1" placeholder="Qty."/>
-                                    <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i
-                                            class=" icon-shopping-cart"></i></button>
+                                    <form method="get" action="#">
+                                        <label>Qty : </label>
+                                        <input type="number" class="span1" placeholder="Qty." value="1" min="1"
+                                               max="{{ products.stock }}" style="height:30px;width:70px;"/>
+                                        <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart
+                                            <i class=" icon-shopping-cart"></i></button>
+                                    </form>
+
                                 </div>
                             </div>
                         </form>
