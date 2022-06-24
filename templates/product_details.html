@@ -40,8 +40,8 @@
                                         <label>Qty : </label>
                                         <input type="number" class="span1" placeholder="Qty." value="1" min="1"
                                                max="{{ products.stock }}" style="height:30px;width:70px;"/>
-                                        <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart
-                                            <i class=" icon-shopping-cart"></i></button>
+                                        <a href="{% url 'addtocart' products.id %}" class="btn btn-large btn-primary pull-right"> Add to cart
+                                            <i class=" icon-shopping-cart"></i></a>
                                     </form>
                                 </div>
                             </div>

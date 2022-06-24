@@ -3,76 +3,68 @@
 {% load static %}
 <!-- Header End====================================================================== -->
 <div id="mainBody">
-	<div class="container">
-	<div class="row">
+    <div class="container-fluid ">
+        <div class="row">
 
-	<div class="span9">
-    <ul class="breadcrumb">
-		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-		<li class="active"> SHOPPING CART</li>
-    </ul>
-	<h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
-	<hr class="soft"/>
-	<table class="table table-bordered">
-		<tr><th> I AM ALREADY REGISTERED  </th></tr>
-		 <tr>
-		 <td>
-			<form class="form-horizontal">
-				<div class="control-group">
-				  <label class="control-label" for="inputUsername">Username</label>
-				  <div class="controls">
-					<input type="text" id="inputUsername" placeholder="Username">
-				  </div>
-				</div>
-				<div class="control-group">
-				  <label class="control-label" for="inputPassword1">Password</label>
-				  <div class="controls">
-					<input type="password" id="inputPassword1" placeholder="Password">
-				  </div>
-				</div>
-				<div class="control-group">
-				  <div class="controls">
-					<button type="submit" class="btn">Sign in</button> OR <a href="register.html" class="btn">Register Now!</a>
-				  </div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-					  <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
-					</div>
-				</div>
-			</form>
-		  </td>
-		  </tr>
-	</table>
+            <div class="span12">
+                <ul class="breadcrumb">
+                    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                    <li class="active"> SHOPPING CART</li>
+                </ul>
+                <h3> SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i
+                        class="icon-arrow-left"></i> Continue Shopping </a></h3>
+                <hr class="soft"/>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Quantity/Update</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ct in cart %}
+                    <tr>
+                        <td><a href="{% url 'prod_detail' ct.prod.slug %}"><img width="60" src="{{ ct.prod.product_image.url }}" alt=""/></a></td>
+                        <td><a href="{% url 'prod_detail' ct.prod.slug %}" style="text-decoration: none;">{{ct.prod.desc}}</a></td>
+                        <td>
+                            <div class="input-append"><input class="span1" style="height:35px;width:70px;"
+                                                             placeholder="1" type="number" min="1" max="{{ct.prod.stock}}" value="{{ct.qty}}">
+                                <button class="btn" type="button"><i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                                         class="bi bi-upload" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                        <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                                    </svg>
+                                </i></button>
+                                <button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td>{{ct.prod.product_price}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+                <a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
 
-	<table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Description</th>
-                  <th>Quantity/Update</th>
-				  <th>Price</th>
-				</tr>
-              </thead>
-              <tbody>
-                  <td> <img width="60" src="{% static 'themes/images/products/8.jpg' %}" alt=""/></td>
-                  <td>{{cart.}}</td>
-				  <td>
-					<div class="input-append"><input class="span1" style="max-width:34px" placeholder="1"  size="16" type="text"><button class="btn" type="button"><i class="icon-minus"></i></button><button class="btn" type="button"><i class="icon-plus"></i></button><button class="btn btn-danger" type="button"><i class="icon-remove icon-white"></i></button>				</div>
-				  </td>
-                  <td>$7.00</td>
-                </tr>
-				</tbody>
-            </table>
-
-
-
-	<a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-	<a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
-
+            </div>
+        </div>
+    </div>
 </div>
-</div></div>
-</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <!-- MainBody End ============================= -->
-
 {% endblock %}
