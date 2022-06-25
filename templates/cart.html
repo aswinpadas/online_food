@@ -29,7 +29,8 @@
                         <td><a href="{% url 'prod_detail' ct.prod.slug %}"><img width="100%" height="100%"
                                                                                 src="{{ ct.prod.product_image.url }}"
                                                                                 alt=""/></a></td>
-                        <td><a href="{% url 'prod_detail' ct.prod.slug %}" style="text-decoration: none;">{{ct.prod.desc}}</a>
+                        <td><a href="{% url 'prod_detail' ct.prod.slug %}" style="text-decoration: none;"><strong>{{ct.prod.product_name}}</strong><br>
+                            <br>{{ct.prod.desc}}</a>
                         </td>
                         <td>
                             <div class="input-append">
@@ -38,19 +39,22 @@
                                        placeholder="1" type="text" min="1" max="{{ct.prod.stock}}" value="{{ct.qty}}"
                                        readonly>
                                 <a href="{%url 'min' ct.prod %}">
-                                    <button class="btn btn-danger" type="button"><i class="icon-minus "></i></button>
+                                    <button class="btn btn-danger" type="button" {% if ct.qty == 1 %} disabled {% endif %}><i class="icon-minus " ></i></button>
                                 </a>
+
                                 <a href="{% url 'addtocart' ct.prod.id %}">
-                                <button class="btn btn-danger" type="button" style="height:35px;width:50px;"><i
+                                <button class="btn btn-danger" type="button" style="height:35px;width:50px;" {% if ct.prod.stock == ct.qty %} disabled {% endif %}><i
                                         class="icon-plus " ></i>
                                 </button>
                                 </a>
                                 <a href="{%url 'delete' ct.prod %}">
-                                <button class="btn btn-danger" type="button" style="height:35px;width:50px;"><i
+                                <button class="btn btn-danger" type="button" style="height:35px;width:50px;" ><i
                                         class="icon-remove icon-white"></i>
                                 </button>
                                 </a>
                             </div>
+                            <br><strong> Stock : {{ct.prod.stock}}</strong>
+                            <br> {% if ct.prod.stock == ct.qty %}<label style="color : red;">!!Qty reached maxium of our Stock !! </label>{% endif %}
                         </td>
                         <td>{{ct.prod.product_price}}</td>
                     </tr>
