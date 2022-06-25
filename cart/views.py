@@ -21,8 +21,9 @@ def c_id(req):
 def addCart(req, prodect_id):
     prodt = ProductsModel.objects.get(id=prodect_id)
     try:
-        ct = CartModel.objects.get(cart_id=c_id(req))
-    except CartModel.DoesNotExist:
+        cti = CartItemModel.objects.get(prod=prodt)
+        ct =cti.cart
+    except:
         ct = CartModel.objects.create(cart_id=c_id(req))
         ct.save()
     try:
@@ -37,9 +38,13 @@ def addCart(req, prodect_id):
     return redirect('cart')
 
 
-def minCart(req):
-    pass
-
-
-def deleteCart(req):
-    pass
+def minCart(req,prod):
+    ct_obj= CartItemModel.objects.get(prod__slug=prod)
+    if ct_obj.qty > 1:
+        ct_obj.qty-=1
+    ct_obj.save()
+    return redirect('cart')
+def deleteCart(req,prod):
+    ct_obj = CartItemModel.objects.get(prod__slug=prod)
+    ct_obj.delete()
+    return redirect('cart')

@@ -236,9 +236,9 @@ body, html {
             <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-            <a href="#">All</a>
-            <a href="#">Veg</a>
-            <a href="#">Non veg</a>
+            <a href="/">All</a>
+            <a href="{% url 'homefilter' 'veg' %}">Veg</a>
+            <a href="{% url 'homefilter' 'non-veg' %}">Non veg</a>
         </div>
     </div>
     <a href="#Login" class="active-nv">Login</a>
