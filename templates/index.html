@@ -20,8 +20,9 @@
 						<li class="span3">
 							<div class="card" >
 								<div class="card-body">
+									<div class="card-img-body">
 									<a  href="{% url 'prod_detail' product.slug %}"><img src="{{product.product_image.url}}" style="" class="card-img-top" alt=""/></a>
-
+										</div>
 									<div class="caption">
 									  <h5 align="center">{{product.product_name | slice:":22"}}</h5>
 									  <a  href="{% url 'prod_detail' product.slug %}" style="text-decoration: none;"><p>

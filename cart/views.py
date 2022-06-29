@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 def cartView(req):
-    ct_obj = CartItemModel.objects.all()
+    ct_obj = CartItemModel.objects.all().filter(cart__cart_id=c_id(req))
     return render(req, 'cart.html', {'cart': ct_obj})
 
 
