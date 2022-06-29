@@ -14,26 +14,26 @@ def cartView(req):
 def c_id(req):
     ct_id = req.session.session_key
     if not ct_id:
-        ct_id = req.session.create
+        req.session.create()
+        return req.session.session_key
     return ct_id
 
 
 def addCart(req, prodect_id):
-    prodt = ProductsModel.objects.get(id=prodect_id)
     try:
-        cti = CartItemModel.objects.get(prod=prodt)
-        ct =cti.cart
-    except:
-        ct = CartModel.objects.create(cart_id=c_id(req))
-        ct.save()
+        cart = CartModel.objects.get(cart_id=c_id(req))
+    except CartModel.DoesNotExist:
+        cart = CartModel.objects.create(cart_id=c_id(req))
+        cart.save()
+
+    product = ProductsModel.objects.get(id=prodect_id)
     try:
-        ct_items = CartItemModel.objects.get(prod=prodt, cart=ct)
+        ct_items = CartItemModel.objects.get(prod=product, cart=cart)
         if ct_items.qty < ct_items.prod.stock:
             ct_items.qty += 1
-        ct_items.save()
     except CartItemModel.DoesNotExist:
-        ct_items = CartItemModel.objects.create(prod=prodt, cart=ct, qty=1)
-        ct_items.save()
+        ct_items = CartItemModel.objects.create(prod=product, cart=cart, qty=1)
+    ct_items.save()
     # return HttpResponse('ADDED TO CART <a href="/">return</a>')
     return redirect('cart')
 
