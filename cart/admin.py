@@ -4,11 +4,11 @@ from .models import *
 
 
 class CartModelAdmin(admin.ModelAdmin):
-    list_display = ['cart_id','date_added']
+    list_display = ['id','cart_id','date_added']
 
 
 class CartItemModelAdmin(admin.ModelAdmin):
-    list_display = ['prod','cart','qty']
+    list_display = ['id','prod','cart','qty']
 
 
 admin.site.register(CartModel,CartModelAdmin)
