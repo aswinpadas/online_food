@@ -38,7 +38,7 @@
                                 <input class="span1" style="height:35px;width:50px;background-color : white;"
                                        placeholder="1" type="text" min="1" max="{{ct.prod.stock}}" value="{{ct.qty}}"
                                        readonly>
-                                <a href="{%url 'min' ct.prod %}">
+                                <a href="{%url 'min' ct.prod.id %}">
                                     <button class="btn btn-danger" type="button" {% if ct.qty == 1 %} disabled {% endif %}><i class="icon-minus " ></i></button>
                                 </a>
 
